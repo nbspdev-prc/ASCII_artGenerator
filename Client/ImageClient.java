@@ -13,33 +13,26 @@ import java.util.List;
 
 public class ImageClient {
 
-    public static void launch() {
-        JFrame frame = new JFrame("Image to ASCII Art");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.setLayout(new BorderLayout());
+    public static JPanel createPanel(JFrame parentFrame) {
+        JPanel mainPanel = new JPanel(new BorderLayout());
 
-        // Top panel: File chooser button
         JPanel topPanel = new JPanel();
         JButton chooseImageButton = new JButton("Choose Image");
         topPanel.add(chooseImageButton);
 
-        // Output area
         JTextArea outputArea = new JTextArea();
         outputArea.setFont(new Font("Monospaced", Font.PLAIN, 8));
         outputArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(outputArea);
 
-        frame.add(topPanel, BorderLayout.NORTH);
-        frame.add(scrollPane, BorderLayout.CENTER);
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Translator instance
         Translator<BufferedImage> imageTranslator = new ImageTranslator();
 
-        // Button action
         ActionListener chooseImageAction = e -> {
             JFileChooser fileChooser = new JFileChooser();
-            int result = fileChooser.showOpenDialog(frame);
+            int result = fileChooser.showOpenDialog(parentFrame);
 
             if (result == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
@@ -48,12 +41,20 @@ public class ImageClient {
                     List<String> asciiArt = imageTranslator.translate(image);
                     outputArea.setText(String.join("\n", asciiArt));
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frame, "Failed to load image: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(parentFrame, "Failed to load image: " + ex.getMessage());
                 }
             }
         };
         chooseImageButton.addActionListener(chooseImageAction);
 
-        SwingUtilities.invokeLater(() -> frame.setVisible(true));
+        return mainPanel;
+    }
+
+    public static void launch() {
+        JFrame frame = new JFrame("Image to ASCII Art");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.add(createPanel(frame));
+        frame.setVisible(true);
     }
 }

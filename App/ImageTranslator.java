@@ -8,15 +8,24 @@ import java.util.List;
 public class ImageTranslator implements Translator<BufferedImage> {
     private static final String ASCII_CHARS = "@%#*+=-:. ";
 
-    private BufferedImage resizeImage(BufferedImage originalImage, int newWidth) {
-        int newHeight = (originalImage.getHeight() * newWidth) / originalImage.getWidth();
-        Image tmp = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+    private BufferedImage resizeImage(BufferedImage originalImage, double scalePercent) {
+        if (scalePercent >= 100.0) return originalImage;
+        if (scalePercent <= 0.0) return new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
+
+        int newWidth = (int) (originalImage.getWidth() * scalePercent / 100.0);
+        
+        // Compensate for character aspect ratio (characters are taller than they are wide)
+        double aspectCorrection = 0.5; // adjust based on your font if needed
+        int newHeight = (int) (originalImage.getHeight() * scalePercent / 100.0 * aspectCorrection);
+
+        Image temp = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
         BufferedImage resized = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = resized.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
+        g2d.drawImage(temp, 0, 0, null);
         g2d.dispose();
         return resized;
     }
+
 
     private char mapGrayToChar(int gray) {
         int index = (gray * (ASCII_CHARS.length() - 1)) / 255;
@@ -25,7 +34,7 @@ public class ImageTranslator implements Translator<BufferedImage> {
 
     @Override
     public List<String> translate(BufferedImage inputImage) {
-        BufferedImage image = resizeImage(inputImage, 100);
+        BufferedImage image = resizeImage(inputImage, 10);
         List<String> result = new ArrayList<>();
 
         for (int y = 0; y < image.getHeight(); y++) {

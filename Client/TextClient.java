@@ -9,11 +9,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class TextClient {
-    public static void launch() {
-        JFrame frame = new JFrame("ASCII Art Translator");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.setLayout(new BorderLayout());
+    public static JPanel createPanel() {
+        JPanel mainPanel = new JPanel(new BorderLayout());
 
         JPanel inputPanel = new JPanel();
         JTextField inputField = new JTextField(30);
@@ -27,8 +24,8 @@ public class TextClient {
         outputArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(outputArea);
 
-        frame.add(inputPanel, BorderLayout.NORTH);
-        frame.add(scrollPane, BorderLayout.CENTER);
+        mainPanel.add(inputPanel, BorderLayout.NORTH);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         Translator<String> translator = new TextTranslator();
 
@@ -41,6 +38,14 @@ public class TextClient {
         translateButton.addActionListener(action);
         inputField.addActionListener(action);
 
-        SwingUtilities.invokeLater(() -> frame.setVisible(true));
+        return mainPanel;
+    }
+
+    public static void launch() {
+        JFrame frame = new JFrame("ASCII Art Translator");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.add(createPanel());
+        frame.setVisible(true);
     }
 }
