@@ -18,7 +18,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "📦 Creating JAR file..."
-jar cfm MyApp.jar manifest.txt -C Build .
+jar cfm MyApp.jar manifest.mf -C Build .
 
 if [ $? -eq 0 ]; then
   echo "✅ Build successful!"
