@@ -1,24 +1,30 @@
 #!/bin/bash
-echo "Cleaning old build files..."
-rm -rf build MyApp.jar
 
-echo "Creating build directory..."
-mkdir -p build
+echo "🔄 Cleaning old build files..."
+rm -rf Build MyApp.jar
 
-echo "Compiling Java files..."
-javac -d build App/*.java Main.java
+echo "📁 Creating Build directory..."
+mkdir -p Build
+
+echo "🧵 Compiling Java files..."
+find . -name "*.java" > sources.txt
+
+javac -d Build @sources.txt
 
 if [ $? -ne 0 ]; then
-  echo "❌ Compilation failed. Check errors above."
+  echo "❌ Compilation failed. Check the errors above."
+  rm sources.txt
   exit 1
 fi
 
-echo "Creating JAR file..."
-jar cfm MyApp.jar manifest.txt -C build .
+echo "📦 Creating JAR file..."
+jar cfm MyApp.jar manifest.txt -C Build .
 
 if [ $? -eq 0 ]; then
-  echo "✅ Build successful! Run the app with:"
-  echo "java -jar MyApp.jar"
+  echo "✅ Build successful!"
+  echo "▶️ Run the app with: java -jar MyApp.jar"
 else
   echo "❌ Failed to create JAR file."
 fi
+
+rm sources.txt
