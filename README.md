@@ -1,16 +1,20 @@
-# ASCII Art Generator
-
+# ASCII Art Generato
 ASCII Art Generator is a Java-based application that converts text into ASCII art using a graphical user interface (GUI). The application leverages a predefined font table to generate ASCII art representations of characters.
 
 ## Features
-
 - **Text-to-ASCII Conversion**: Enter any text, and the application will generate its ASCII art representation.
 - **Graphical User Interface**: User-friendly GUI built with Java Swing.
 - **Custom Font Table**: Supports a wide range of characters, including letters, numbers, and symbols.
 
 ## How to Run
 
-1. **Run the Build Script**:
+1. **Make the Build Script Executable** (only required once):
+   - Run the following command to make the `build.sh` script executable:
+     ```sh
+     chmod +x build.sh
+     ```
+
+2. **Run the Build Script**:
    - Use the provided `build.sh` script to compile the project, create the JAR file, and run the application.
    - Open a terminal and navigate to the project directory.
    - Run the following command:
@@ -18,7 +22,7 @@ ASCII Art Generator is a Java-based application that converts text into ASCII ar
      ./build.sh
      ```
 
-2. **Using the GUI**:
+3. **Using the GUI**:
    - Enter text in the input field and click the "Translate" button to see the ASCII art in the output area.
 
 ## How to Build and Run Manually (Optional)
@@ -66,14 +70,11 @@ ASCII_artGenerator/
 ```
 
 ## Dependencies
-
 - Java Development Kit (JDK) 8 or higher.
 
 ## License
-
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ## Acknowledgments
-
 - ASCII art font inspired by various online resources.
 - Built using Java Swing for the GUI.
