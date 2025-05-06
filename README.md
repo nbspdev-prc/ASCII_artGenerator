@@ -60,11 +60,16 @@ If you prefer not to use the `build.sh` script, you can manually build and run t
 ASCII_artGenerator/
 ├── src/
 │   ├── Main.java                # Main entry point with GUI implementation
-│   └── App/
-│       ├── FontTable.java       # Contains the ASCII art font table
-│       └── Translator.java      # Handles text-to-ASCII conversion
-├── build/                       # Compiled classes and build artifacts
-├── MyApp.jar                    # Prebuilt JAR file
+│   ├── App/
+│   │   ├── FontTable.java       # Contains the ASCII art font table
+│   │   ├── TextTranslator.java  # Handles text-to-ASCII conversion
+│   │   ├── ImageTranslator.java # Handles image-to-ASCII conversion
+│   │   └── Translator.java      # Interface for translation logic
+│   └── Client/
+│       ├── TextClient.java      # GUI for text-to-ASCII translation
+│       └── ImageClient.java     # GUI for image-to-ASCII translation
+├── Build/                       # Compiled classes and build artifacts
+├── MyApp.jar                    # Prebuilt JAR file for running the application
 ├── manifest.mf                  # Manifest file for JAR packaging
 ├── build.sh                     # Build script for automating the process
 ├── README.md                    # Project documentation
