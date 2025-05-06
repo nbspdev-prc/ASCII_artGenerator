@@ -3,6 +3,7 @@ ASCII Art Generator is a Java-based application that converts text into ASCII ar
 
 ## Features
 - **Text-to-ASCII Conversion**: Enter any text, and the application will generate its ASCII art representation.
+- **Image-to-ASCII Conversion**: Enter any image, and the application will do the same thing.
 - **Graphical User Interface**: User-friendly GUI built with Java Swing.
 - **Custom Font Table**: Supports a wide range of characters, including letters, numbers, and symbols.
 
