@@ -10,20 +10,70 @@ ASCII Art Generator is a Java-based application that converts text into ASCII ar
 
 ## How to Run
 
-1. **Download or Build the JAR File**:
-   - If you already have the `MyApp.jar` file, skip to step 2.
-   - To build the JAR file yourself, follow the steps in the [How to Build a JAR File](#how-to-build-a-jar-file) section.
-
-2. **Run the Application**:
-   - Open a terminal and navigate to the directory containing `MyApp.jar`.
+1. **Run the Build Script**:
+   - Use the provided `build.sh` script to compile the project, create the JAR file, and run the application.
+   - Open a terminal and navigate to the project directory.
    - Run the following command:
+     ```sh
+     ./build.sh
+     ```
+
+2. **Using the GUI**:
+   - Enter text in the input field and click the "Translate" button to see the ASCII art in the output area.
+
+## How to Build and Run Manually (Optional)
+
+If you prefer not to use the `build.sh` script, you can manually build and run the application:
+
+1. **Compile the Project**:
+   - Run the following command to compile the Java files:
+     ```sh
+     javac -d build src/Main.java src/App/*.java
+     ```
+
+2. **Create the Manifest File**:
+   - Create a file named `manifest.mf` with the following content:
+     ```
+     Main-Class: Main
+     ```
+
+3. **Package the JAR File**:
+   - Run the following command to create the JAR file:
+     ```sh
+     jar cfm MyApp.jar manifest.mf -C build .
+     ```
+
+4. **Run the Application**:
+   - Execute the JAR file using:
      ```sh
      java -jar MyApp.jar
      ```
 
-3. **Using the GUI**:
-   - Enter text in the input field and click the "Translate" button to see the ASCII art in the output area.
+## Project Structure
 
-## How to Build a JAR File
+```
+ASCII_artGenerator/
+├── src/
+│   ├── Main.java                # Main entry point with GUI implementation
+│   └── App/
+│       ├── FontTable.java       # Contains the ASCII art font table
+│       └── Translator.java      # Handles text-to-ASCII conversion
+├── build/                       # Compiled classes and build artifacts
+├── MyApp.jar                    # Prebuilt JAR file
+├── manifest.mf                  # Manifest file for JAR packaging
+├── build.sh                     # Build script for automating the process
+├── README.md                    # Project documentation
+```
 
-1. Create a manifest file (`manifest.mf`) with the following content:
+## Dependencies
+
+- Java Development Kit (JDK) 8 or higher.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Acknowledgments
+
+- ASCII art font inspired by various online resources.
+- Built using Java Swing for the GUI.
