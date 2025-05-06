@@ -1,5 +1,0 @@
-# Ignore all .class files inside App/
-App/*.class
-
-# Ignore Main.class in the root or src folder (outside of App/)
-Main.class
