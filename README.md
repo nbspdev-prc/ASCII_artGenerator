@@ -36,19 +36,13 @@ If you prefer not to use the `build.sh` script, you can manually build and run t
      javac -d build src/Main.java src/App/*.java
      ```
 
-2. **Create the Manifest File**:
-   - Create a file named `manifest.mf` with the following content:
-     ```
-     Main-Class: Main
-     ```
-
-3. **Package the JAR File**:
+2. **Package the JAR File**:
    - Run the following command to create the JAR file:
      ```sh
      jar cfm MyApp.jar manifest.mf -C build .
      ```
 
-4. **Run the Application**:
+3. **Run the Application**:
    - Execute the JAR file using:
      ```sh
      java -jar MyApp.jar
