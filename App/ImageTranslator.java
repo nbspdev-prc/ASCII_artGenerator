@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImageTranslator implements Translator<BufferedImage> {
-    private static final String ASCII_CHARS = "@%#*+=-:. ";
+    private static final String ASCII_CHARS_DETAILED = "@$B%8WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
+    private static final String ASCII_CHARS= "@%#*+=-:. ";
 
     private BufferedImage resizeImage(BufferedImage originalImage, double scalePercent) {
         if (scalePercent >= 100.0) return originalImage;
@@ -34,15 +35,21 @@ public class ImageTranslator implements Translator<BufferedImage> {
 
     @Override
     public List<String> translate(BufferedImage inputImage) {
-        BufferedImage image = resizeImage(inputImage, 10);
+        BufferedImage image = resizeImage(inputImage, 15);
         List<String> result = new ArrayList<>();
 
         for (int y = 0; y < image.getHeight(); y++) {
             StringBuilder line = new StringBuilder();
             for (int x = 0; x < image.getWidth(); x++) {
                 Color pixel = new Color(image.getRGB(x, y));
-                int gray = (int)(0.299 * pixel.getRed() + 0.587 * pixel.getGreen() + 0.114 * pixel.getBlue());
-                line.append(mapGrayToChar(gray));
+                // int gray = Math.min(255, Math.max(0, (int)Math.round(
+                //                     0.299 * pixel.getRed() +
+                //                     0.587 * pixel.getGreen() +
+                //                     0.114 * pixel.getBlue()
+                //                 )));
+                // int index = (gray * (ASCII_CHARS.length() - 1)) / 255;
+                int index = (int)(0.299 * pixel.getRed() + 0.587 * pixel.getGreen() + 0.114 * pixel.getBlue());
+                line.append(mapGrayToChar(index));
             }
             result.add(line.toString());
         }
