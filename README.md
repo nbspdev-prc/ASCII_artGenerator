@@ -1,4 +1,4 @@
-# ASCII Art Generato
+# ASCII Art Generator
 ASCII Art Generator is a Java-based application that converts text into ASCII art using a graphical user interface (GUI). The application leverages a predefined font table to generate ASCII art representations of characters.
 
 ## Features
